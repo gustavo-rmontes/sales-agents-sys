@@ -1,0 +1,16 @@
+GET http://localhost:8000/api
+Content-Type: application/json
+
+###
+
+GET http://localhost:8000/api/health
+Content-Type: application/json
+
+###
+
+POST http://localhost:8000/api/prospect
+Content-Type: application/json
+
+{
+    "user_input": "Quero comprar uma casa"
+}
