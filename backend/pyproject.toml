@@ -1,0 +1,16 @@
+[project]
+name = "Sales-intelligence-Agents"
+version = "0.1.0"
+description = "API for intelligent lead prospecting, powered by generative AI agents orchestrated with CrewAI. The application collects, enriches, and prioritizes potential customer information to support sales teams."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "crewai>=0.186.1",
+    "fastapi>=0.116.1",
+    "google-generativeai>=0.8.5",
+    "httpx>=0.28.1",
+    "langchain>=0.3.27",
+    "pytest>=8.4.2",
+    "python-dotenv>=1.1.1",
+    "uvicorn>=0.35.0",
+]
