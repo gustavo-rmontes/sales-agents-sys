@@ -1,0 +1,73 @@
+# Configuração das Tarefas para Prospecção Inteligente de Leads
+
+pesquisa_empresa:
+  description: >
+    Pesquisar informações detalhadas sobre a empresa {company_name} e seu website {website}.
+    Coletar dados básicos como setor de atuação, porte da empresa, produtos/serviços,
+    localização, faturamento estimado e informações relevantes para prospecção.
+    Para esta fase MVP, retornar dados mockados estruturados em JSON.
+  expected_output: >
+    JSON estruturado contendo:
+    - nome_da_empresa: string
+    - website: string
+    - setor: string
+    - porte: string (pequena/média/grande)
+    - descricao: string (breve descrição da empresa)
+    - produtos_servicos: array de strings
+    - localizacao: string
+    - faturamento_estimado: string
+    - funcionarios_estimado: string
+  agent: pesquisador
+
+analise_mercado:
+  description: >
+    Analisar os dados coletados sobre {company_name} e gerar insights sobre:
+    - Dores e desafios comuns do setor
+    - Tendências de mercado relevantes
+    - Concorrentes diretos e indiretos
+    - Oportunidades de negócio identificadas
+    - Pontos de dor específicos que nossa solução pode resolver
+  expected_output: >
+    Resumo estruturado contendo:
+    - resumo_empresa: string (análise da empresa)
+    - dores_setor: array de strings (principais dores do setor)
+    - concorrentes: array de strings (principais concorrentes)
+    - tendencias_mercado: array de strings (tendências relevantes)
+    - oportunidades: array de strings (oportunidades identificadas)
+    - pontos_dor: array de strings (dores específicas que podemos resolver)
+  agent: analista
+  context:
+    - pesquisa_empresa
+
+criar_mensagem_prospeccao:
+  description: >
+    Criar uma mensagem de prospecção personalizada baseada na análise de mercado
+    para {company_name}. A mensagem deve ser persuasiva, personalizada e focada
+    nas dores identificadas. Formato de email profissional.
+  expected_output: >
+    Email de prospecção estruturado contendo:
+    - assunto: string (assunto do email)
+    - corpo_email: string (corpo do email em HTML/texto)
+    - call_to_action: string (próximos passos sugeridos)
+    - personalizacao: string (elementos de personalização utilizados)
+  agent: copywriter
+  context:
+    - analise_mercado
+
+consolidar_resultado:
+  description: >
+    Consolidar todos os resultados das análises e criar um relatório final
+    estruturado com as informações da empresa, análise de mercado e mensagem
+    de prospecção personalizada.
+  expected_output: >
+    Relatório final consolidado em JSON contendo:
+    - empresa: objeto com dados da empresa
+    - analise: objeto com análise de mercado
+    - mensagem_prospeccao: objeto com email de prospecção
+    - resumo_executivo: string (resumo de 2-3 linhas)
+    - proximos_passos: array de strings (ações recomendadas)
+  agent: consolidador
+  context:
+    - pesquisa_empresa
+    - analise_mercado
+    - criar_mensagem_prospeccao
