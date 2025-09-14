@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 gemini_llm = LLM(
-    model="gemini/gemini-1.5-flash",
+    model="gemini/gemini-2.0-flash",
     temperature=0.7,
 )
 
@@ -86,19 +86,15 @@ class SalesCrew():
     @crew
     def crew(self) -> Crew:
         return Crew(
+            # verbose=True,
             agents=self.agents,
             tasks=self.tasks,
-            process=Process.sequential,
-            verbose=True
+            process=Process.sequential
         )
-    
-testing_inputs = {
-    'company_name': 'Sales Impact',
-    'website': 'https://salesimpact.com.br/'
-}
 
-my_crew = SalesCrew().crew()
+sales_crew = SalesCrew().crew()
 
-result = my_crew.kickoff(inputs=testing_inputs)
+def run_sales_crew(crew, new_inputs) -> str:
+    return crew.kickoff(inputs=new_inputs)
 
-print(result)
+# print(run_sales_crew(sales_crew, new_inputs={"company_name":"Nome empresa","website":"site empresa"}))
