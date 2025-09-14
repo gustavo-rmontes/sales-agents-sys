@@ -1,10 +1,10 @@
-# Prospecção Inteligente de Leads 🚀
+# Prospecção Inteligente de Leads 
 Este projeto é um **MVP** desenvolvido para demonstrar o uso de **agentes de IA** generativa aplicados à **prospecção inteligente de leads**.
 
 A solução coleta informações sobre empresas, analisa concorrência e gera uma mensagem de prospecção personalizada para **apoiar times de vendas**.
 
 ## 📌 Funcionalidades do MVP
-**Entrada**: nome ou site da empresa.
+**Entrada**: nome e site da empresa.
 
 **Saída**: Resumo da empresa, Concorrentes do setor e Mensagem de prospecção personalizada.
 
