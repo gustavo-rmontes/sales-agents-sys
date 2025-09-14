@@ -24,7 +24,7 @@ HTML, CSS, JS e Bootstrap → formulário simples para interação.
 - 🔎 Pesquisador → coleta informações iniciais da empresa.
 - 📊 Analista → resume informações e identifica concorrentes.
 - ✍️ Copywriter → gera mensagem de prospecção personalizada.
-- 🎯 Orquestrador → coordena a execução dos agentes.
+- 🎯 Consolidador → consolida e administra a saída dos demais agentes.
 
 ### ⚙️ Tecnologias utilizadas
 - Python 3.12+
@@ -35,7 +35,24 @@ HTML, CSS, JS e Bootstrap → formulário simples para interação.
 - Bootstrap 5
 
 ## 📂 Estrutura do Projeto
-// **Todo**: adicionar estrutura (`tree .`) do projeto
+``` bash
+.
+├── backend
+│   ├── agents
+│   │   └── config
+│   ├── core
+│   ├── endpoints
+│   ├── schemas
+│   ├── services
+│   └── tests
+│       ├── http_requests
+│       └── unit
+├── docs
+└── frontend
+    ├── assets
+    ├── scripts
+    └── styles
+```
 
 ## 🔑 Variáveis de Ambiente
 Crie um arquivo `.env` dentro de `backend/` baseado em [`.env.example`](backend/.env.example):
