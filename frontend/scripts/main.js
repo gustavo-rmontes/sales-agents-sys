@@ -87,7 +87,7 @@ function mostrarResultados() {
     document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Função para simular busca (será substituída pela chamada real da API)
+
 function configurarBusca() {
     document.getElementById('btnBuscar').addEventListener('click', async function() {
         const nomeEmpresa = document.getElementById('empresaNome').value.trim();
@@ -95,7 +95,7 @@ function configurarBusca() {
         
         // Validar parâmetros
         if (!validarParametros(nomeEmpresa, siteEmpresa)) {
-            exibirErro('Por favor, preencha pelo menos um dos campos (Nome da Empresa ou Site da Empresa).');
+            exibirErro('Por favor, preencha os dois campos (Nome da Empresa e Site da Empresa).');
             return;
         }
         
@@ -127,9 +127,7 @@ function configurarBusca() {
                 exibirErro('Erro de CORS. Verifique se o servidor permite requisições do frontend.');
             } else if (error.message.includes('422')) {
                 exibirErro('Parâmetros inválidos. Verifique se os dados estão corretos.');
-            } else if (error.message.includes('Todos os endpoints falharam')) {
-                exibirErro('Não foi possível conectar com a API. Use o botão "Teste" para ver dados de demonstração.');
-            } else {
+            }  else {
                 exibirErro(`Erro: ${error.message}. Use o botão "Teste" para ver dados de demonstração.`);
             }
         } finally {
@@ -139,51 +137,22 @@ function configurarBusca() {
     });
 }
 
-// Função para configurar botão de teste
-function configurarTeste() {
-    document.getElementById('btnTeste').addEventListener('click', function() {
-        // Preencher campos de exemplo
-        document.getElementById('empresaNome').value = 'Sales Impact';
-        document.getElementById('empresaSite').value = 'https://salesimpact.com.br/';
-        
-        // Esconder erros anteriores
-        esconderErro();
-        
-        // Simular loading
-        this.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Carregando...';
-        this.disabled = true;
-        
-        setTimeout(() => {
-            // Preencher com dados de demonstração
-            preencherDados(dadosDemonstracao);
-            
-            // Mostrar seção de resultados
-            mostrarResultados();
-            
-            // Resetar botão
-            this.innerHTML = '<i class="fas fa-flask me-2"></i>Teste';
-            this.disabled = false;
-        }, 1500);
-    });
-}
-
 // Função para testar conectividade com a API na inicialização
 async function verificarConectividadeAPI() {
     try {
         const conectado = await testarConectividadeAPI();
         if (conectado) {
-            console.log('✅ API conectada com sucesso');
+            console.log('API conectada com sucesso');
         } else {
-            console.warn('⚠️ API não está acessível - usando dados de demonstração');
+            console.warn('API não está acessível');
         }
     } catch (error) {
-        console.warn('⚠️ Erro ao verificar conectividade da API:', error);
+        console.warn('Erro ao verificar conectividade da API:', error);
     }
 }
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
     configurarBusca();
-    configurarTeste();
     verificarConectividadeAPI();
 });

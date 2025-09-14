@@ -12,10 +12,10 @@ async function buscarDadosProspeccao(nomeEmpresa, website) {
     try {
         console.log(`Buscando dados para: ${nomeEmpresa} - ${website}`);
         const dados = await tentarEndpoint(nomeEmpresa, website);
-        console.log(`✅ Sucesso na busca de dados`);
+        console.log(`Sucesso na busca de dados`);
         return dados;
     } catch (error) {
-        console.error(`❌ Erro na busca:`, error.message);
+        console.error(`Erro na busca:`, error.message);
         throw error;
     }
 }
@@ -115,7 +115,7 @@ function esconderErro() {
  */
 async function testarConectividadeAPI() {
     try {
-        const response = await fetch(`${API_BASE_URL}/api/prospect?nome_da_empresa=teste&website=https://teste.com`, {
+        const response = await fetch(`${API_BASE_URL}/api/health`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
@@ -124,14 +124,14 @@ async function testarConectividadeAPI() {
         });
         
         if (response.ok) {
-            console.log(`✅ API acessível`);
+            console.log(`API acessível`);
             return true;
         } else {
-            console.log(`❌ API retornou status: ${response.status}`);
+            console.log(`API retornou status: ${response.status}`);
             return false;
         }
     } catch (error) {
-        console.error('❌ Erro ao testar conectividade:', error);
+        console.error('Erro ao testar conectividade:', error);
         return false;
     }
 }

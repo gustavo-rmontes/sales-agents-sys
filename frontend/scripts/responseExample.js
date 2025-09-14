@@ -1,3 +1,6 @@
+// Exemplo de resposta da API(JSON)
+
+// empresa = kambum
 const responseExample = {
     "assunto": "Redução de 30% nos custos de TI com migração cloud segura e equipe especializada em AI/ML - Caso Teste Tecnologia",
     "corpo_email": "Prezado(a) [Nome do Gestor],\n\nNa análise do ecossistema de TI brasileiro, identificamos que a Teste Tecnologia enfrenta 3 desafios críticos:\n\n1. Custos elevados com manutenção de sistemas legados (35-40% do orçamento de TI segundo Gartner)\n2. Escassez de talentos em tecnologias como machine learning\n3. Complexidade na governança de ambientes cloud híbridos\n\nNa Kabum, desenvolvimos uma solução integrada para empresas de transformação digital:\n\n✅ Plataforma de Modernização de Legados com módulos FinOps - redução média de 32% em custos operacionais\n✅ Squads especializados em AI/ML sob demanda - 15 especialistas certificados prontos para atuar\n✅ Framework LGPD-as-Code para migrações cloud - aceleramos a conformidade em 40% vs. concorrentes\n\nNa prática: Para a Stefanini TI implementamos um programa que:\n- Reduziu custos de cloud em 28% com otimização automatizada\n- Diminuiu o time-to-market de novas features em low-code em 65%\n\nSugiro uma breve reunião para apresentar o case completo e adaptar soluções às suas prioridades de ESG e escalabilidade.\n",
