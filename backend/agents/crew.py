@@ -5,10 +5,19 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-gemini_llm = LLM(
+dict_of_llms = {
+    "gemini": LLM(
     model="gemini/gemini-2.0-flash",
     temperature=0.7,
-)
+    ),
+    "deepseek": LLM(
+    model="openrouter/deepseek/deepseek-r1",
+    # model="openai/deepseek-chat",
+    temperature=0.7,
+    ) 
+}
+
+CURRENT_LLM = dict_of_llms['deepseek']
 
 search_tool = SerperDevTool()
 
@@ -30,7 +39,7 @@ class SalesCrew():
         return Agent(
             config=self.agents_config['pesquisador'],
             # verbose=True,
-            llm=gemini_llm,
+            llm=CURRENT_LLM,
             tools=[search_tool],
             # max_rpm=5
         )
@@ -40,7 +49,7 @@ class SalesCrew():
         return Agent(
             config=self.agents_config['analista'],
             # verbose=True,
-            llm=gemini_llm,
+            llm=CURRENT_LLM,
             memory=True,
         )
     
@@ -49,14 +58,14 @@ class SalesCrew():
         return Agent(
             config=self.agents_config['copywriter'],
             # verbose=True,
-            llm=gemini_llm
+            llm=CURRENT_LLM
         )
     
     @agent
     def consolidador(self) -> Agent:
         return Agent(
             config=self.agents_config['consolidador'],
-            llm=gemini_llm
+            llm=CURRENT_LLM
         )
     
     @task

@@ -63,6 +63,9 @@ def parse_crew_response(crew_response):
             corpo_email=mensagem_data.get("corpo_email", ""),
             call_to_action=mensagem_data.get("call_to_action", ""),
             personalizacao=mensagem_data.get("personalizacao", "")
+
+            # # Dados de Próximos Passos
+            # proximos_passos=prox_passos_data.get("proximos_passos", "")
         )
         
         return prospeccao_resposta
