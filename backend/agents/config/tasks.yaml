@@ -61,7 +61,6 @@ consolidar_resultado:
     - empresa: objeto com dados da empresa
     - analise: objeto com análise de mercado
     - mensagem_prospeccao: objeto com email de prospecção
-    - resumo_executivo: string (resumo de 2-3 linhas)
     - proximos_passos: array de strings (ações recomendadas)
   agent: consolidador
   context:

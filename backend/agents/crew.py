@@ -94,7 +94,17 @@ class SalesCrew():
 
 sales_crew = SalesCrew().crew()
 
-def run_sales_crew(crew, new_inputs) -> str:
-    return crew.kickoff(inputs=new_inputs)
+def run_sales_crew(crew, company):
+    """
+    Executa a crew de vendas e retorna o resultado.
+    
+    Args:
+        crew: Instância da crew
+        company: Dados da empresa
+    
+    Returns:
+        CrewOutput: Resultado da execução da crew
+    """
+    return crew.kickoff(inputs=company)
 
-# print(run_sales_crew(sales_crew, new_inputs={"company_name":"Nome empresa","website":"site empresa"}))
+# print(run_sales_crew(sales_crew, company={"company_name":"Nome empresa","website":"site empresa"}))

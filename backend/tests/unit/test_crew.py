@@ -23,7 +23,7 @@ llm_answers_mock = {
     CrewTestInput("Google", "https://google.com/")
 ])
 def test_run_sales_crew(mocks):
-    result = run_sales_crew(crew=sales_crew, new_inputs=mocks.to_inputs_format())
+    result = run_sales_crew(crew=sales_crew, company=mocks.to_inputs_format())
 
     assert result is not None
 
