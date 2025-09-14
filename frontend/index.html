@@ -4,8 +4,212 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prospecção Inteligente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Prospecção Inteligente de Leads</h1>
+    <div class="main-container">
+        <div class="container">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="text-white display-4 fw-bold mb-3">
+                    <i class="fas fa-search me-3"></i>
+                    Prospecção Inteligente de Leads
+                </h1>
+                <p class="text-white-50 fs-5">Transforme dados em oportunidades de negócio</p>
+            </div>
+
+            <!-- Search Section -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">
+                        <i class="fas fa-search me-2"></i>
+                        Buscar Informações da Empresa
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="empresaNome" class="form-label fw-semibold">Nome da Empresa</label>
+                            <input type="text" class="form-control" id="empresaNome" placeholder="Digite o nome da empresa">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="empresaSite" class="form-label fw-semibold">Site da Empresa</label>
+                            <input type="url" class="form-control" id="empresaSite" placeholder="https://exemplo.com.br">
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="button" class="btn btn-primary w-100" id="btnBuscar">
+                                <span class="btn-text">
+                                    <i class="fas fa-search me-2"></i>
+                                    Buscar
+                                </span>
+                                <span class="loading">
+                                    <span class="spinner-border spinner-border-sm me-2"></span>
+                                    Buscando...
+                                </span>
+                            </button>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="button" class="btn btn-secondary w-100" id="btnTeste">
+                                <i class="fas fa-flask me-2"></i>
+                                Teste
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section (Initially Hidden) -->
+            <div id="resultados" style="display: none;">
+                
+                <!-- Company Information Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">
+                            <i class="fas fa-building me-2"></i>
+                            Informações da Empresa
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <div class="info-label">Nome da Empresa</div>
+                                    <div class="info-value" id="info-nome-empresa">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <div class="info-label">Setor</div>
+                                    <div class="info-value" id="info-setor">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <div class="info-label">Porte</div>
+                                    <div class="info-value" id="info-porte">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <div class="info-label">Faturamento</div>
+                                    <div class="info-value" id="info-faturamento">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <div class="info-label">Funcionários</div>
+                                    <div class="info-value" id="info-funcionarios">-</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="info-item">
+                                    <div class="info-label">Descrição</div>
+                                    <div class="info-value" id="info-descricao">-</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="info-item">
+                                    <div class="info-label">Produtos e Serviços</div>
+                                    <div class="info-value" id="info-produtos">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Analysis Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">
+                            <i class="fas fa-chart-line me-2"></i>
+                            Análise do Mercado
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <div class="info-label">Resumo da Empresa</div>
+                                    <div class="info-value" id="analise-resumo">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <div class="info-label">Dores do Mercado</div>
+                                    <div class="info-value" id="analise-dores">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <div class="info-label">Concorrentes</div>
+                                    <div class="info-value" id="analise-concorrentes">-</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <div class="info-label">Tendências da Área</div>
+                                    <div class="info-value" id="analise-tendencias">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prospecting Message Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">
+                            <i class="fas fa-envelope me-2"></i>
+                            Mensagem de Prospecção
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="info-item">
+                                    <div class="info-label">Assunto</div>
+                                    <div class="info-value" id="msg-assunto">-</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="info-item">
+                                    <div class="info-label">Corpo do Email</div>
+                                    <div class="email-preview" id="msg-corpo">-</div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="info-item">
+                                    <div class="info-label">Call to Action</div>
+                                    <div class="info-value" id="msg-cta">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps Section -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">
+                            <i class="fas fa-list-check me-2"></i>
+                            Próximos Passos
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="info-item">
+                            <div class="info-label">Ações Recomendadas</div>
+                            <div class="info-value" id="proximos-passos">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/mockData.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
