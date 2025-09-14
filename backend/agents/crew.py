@@ -12,12 +12,11 @@ dict_of_llms = {
     ),
     "deepseek": LLM(
     model="openrouter/deepseek/deepseek-r1",
-    # model="openai/deepseek-chat",
     temperature=0.7,
     ) 
 }
 
-CURRENT_LLM = dict_of_llms['deepseek']
+CURRENT_LLM = dict_of_llms['gemini']
 
 search_tool = SerperDevTool()
 
