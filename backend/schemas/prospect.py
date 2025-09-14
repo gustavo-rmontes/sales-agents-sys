@@ -26,5 +26,8 @@ class MensagemProspeccao(BaseModel):
     call_to_action: str
     personalizacao: str
 
-class ProspeccaoResposta(Empresa, Analise, MensagemProspeccao):
+class ProximosPassos(BaseModel):
+    proximos_passos: List[str]
+
+class ProspeccaoResposta(Empresa, Analise, MensagemProspeccao, ProximosPassos):
     pass

@@ -38,6 +38,7 @@ def parse_crew_response(crew_response):
         empresa_data = data.get("empresa", {})
         analise_data = data.get("analise", {})
         mensagem_data = data.get("mensagem_prospeccao", {})
+        proximos_passos_data = data.get("proximos_passos", [])
         
         # Cria a resposta consolidada diretamente
         prospeccao_resposta = ProspeccaoResposta(
@@ -62,10 +63,10 @@ def parse_crew_response(crew_response):
             assunto=mensagem_data.get("assunto", ""),
             corpo_email=mensagem_data.get("corpo_email", ""),
             call_to_action=mensagem_data.get("call_to_action", ""),
-            personalizacao=mensagem_data.get("personalizacao", "")
+            personalizacao=mensagem_data.get("personalizacao", ""),
 
-            # # Dados de Próximos Passos
-            # proximos_passos=prox_passos_data.get("proximos_passos", "")
+            # Dados de Próximos Passos
+            proximos_passos=proximos_passos_data if isinstance(proximos_passos_data, list) else []
         )
         
         return prospeccao_resposta
