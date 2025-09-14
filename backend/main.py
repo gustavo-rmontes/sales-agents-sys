@@ -3,12 +3,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from core.config import settings
-from api.routes import router
+from endpoints.routes import router
 
 
 app = FastAPI(
     title="InteliProspect Leads API",
-    description="API for the InteliProspect Leads application",
+    description="API para a aplicação InteliProspect Leads",
     version="1.0.0",
 )
 
