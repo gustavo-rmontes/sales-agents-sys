@@ -26,15 +26,12 @@ analise_mercado:
     - Tendências de mercado relevantes
     - Concorrentes diretos e indiretos
     - Oportunidades de negócio identificadas
-    - Pontos de dor específicos que nossa solução pode resolver
   expected_output: >
     Resumo estruturado contendo:
     - resumo_empresa: string (análise da empresa)
     - dores_setor: array de strings (principais dores do setor)
     - concorrentes: array de strings (principais concorrentes)
     - tendencias_mercado: array de strings (tendências relevantes)
-    - oportunidades: array de strings (oportunidades identificadas)
-    - pontos_dor: array de strings (dores específicas que podemos resolver)
   agent: analista
   context:
     - pesquisa_empresa
