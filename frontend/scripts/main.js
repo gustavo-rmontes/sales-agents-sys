@@ -3,48 +3,57 @@
 // Função para preencher dados (será chamada quando a API retornar)
 function preencherDados(dados) {
     // Empresa
-    document.getElementById('info-nome-empresa').textContent = dados.empresa.nome_da_empresa || '-';
-    document.getElementById('info-setor').textContent = dados.empresa.setor || '-';
-    document.getElementById('info-porte').textContent = dados.empresa.porte || '-';
-    document.getElementById('info-faturamento').textContent = dados.empresa.faturamento_estimado || '-';
-    document.getElementById('info-funcionarios').textContent = dados.empresa.funcionarios_estimado || '-';
-    document.getElementById('info-descricao').textContent = dados.empresa.descricao || '-';
+    document.getElementById('info-setor').textContent = dados.setor || '-';
+    document.getElementById('info-porte').textContent = dados.porte || '-';
+    document.getElementById('info-faturamento').textContent = dados.faturamento_estimado || '-';
+    document.getElementById('info-funcionarios').textContent = dados.funcionarios_estimado || '-';
+    document.getElementById('info-descricao').textContent = dados.descricao || '-';
     
     // Produtos
-    if (dados.empresa.produtos_servicos && Array.isArray(dados.empresa.produtos_servicos)) {
-        document.getElementById('info-produtos').innerHTML = dados.empresa.produtos_servicos.map(produto => 
+    if (dados.produtos_servicos && Array.isArray(dados.produtos_servicos)) {
+        document.getElementById('info-produtos').innerHTML = dados.produtos_servicos.map(produto => 
             `<span class="badge bg-primary me-2 mb-1">${produto}</span>`
         ).join('');
     }
     
     // Análise
-    document.getElementById('analise-resumo').textContent = dados.analise.resumo_empresa || '-';
+    document.getElementById('analise-resumo').textContent = dados.resumo_empresa || '-';
     
     // Dores do mercado
-    if (dados.analise.dores_setor && Array.isArray(dados.analise.dores_setor)) {
-        document.getElementById('analise-dores').innerHTML = dados.analise.dores_setor.map(dor => 
+    if (dados.dores_setor && Array.isArray(dados.dores_setor)) {
+        document.getElementById('analise-dores').innerHTML = dados.dores_setor.map(dor => 
             `<div class="list-item">${dor}</div>`
         ).join('');
     }
     
     // Concorrentes
-    if (dados.analise.concorrentes && Array.isArray(dados.analise.concorrentes)) {
-        document.getElementById('analise-concorrentes').innerHTML = dados.analise.concorrentes.map(concorrente => 
+    if (dados.concorrentes && Array.isArray(dados.concorrentes)) {
+        document.getElementById('analise-concorrentes').innerHTML = dados.concorrentes.map(concorrente => 
             `<div class="list-item">${concorrente}</div>`
         ).join('');
     }
     
     // Tendências
-    if (dados.analise.tendencias_mercado && Array.isArray(dados.analise.tendencias_mercado)) {
-        document.getElementById('analise-tendencias').innerHTML = dados.analise.tendencias_mercado.map(tendencia => 
+    if (dados.tendencias_mercado && Array.isArray(dados.tendencias_mercado)) {
+        document.getElementById('analise-tendencias').innerHTML = dados.tendencias_mercado.map(tendencia => 
             `<div class="list-item">${tendencia}</div>`
         ).join('');
     }
     
     // Mensagem de prospecção
-    document.getElementById('msg-assunto').textContent = dados.mensagem_prospeccao.assunto || '-';
-    document.getElementById('msg-corpo').innerHTML = dados.mensagem_prospeccao.corpo_email || '-';
-    document.getElementById('msg-cta').textContent = dados.mensagem_prospeccao.call_to_action || '-';
+    document.getElementById('msg-assunto').textContent = dados.assunto || '-';
+    // Tratar quebras de linha no corpo do email
+    const corpoEmail = dados.corpo_email ? dados.corpo_email.replace(/\n/g, '<br>') : '-';
+    document.getElementById('msg-corpo').innerHTML = corpoEmail;
+    document.getElementById('msg-cta').textContent = dados.call_to_action || '-';
+    
+    // Personalização (novo campo do responseExample.js)
+    if (dados.personalizacao) {
+        const personalizacaoElement = document.getElementById('msg-personalizacao');
+        if (personalizacaoElement) {
+            personalizacaoElement.textContent = dados.personalizacao;
+        }
+    }
     
     // Próximos passos
     if (dados.proximos_passos && Array.isArray(dados.proximos_passos)) {
@@ -56,38 +65,77 @@ function preencherDados(dados) {
     }
 }
 
+// Função para mostrar/ocultar loading
+function toggleLoading(button, isLoading) {
+    const btnText = button.querySelector('.btn-text');
+    const loading = button.querySelector('.loading');
+    
+    if (isLoading) {
+        btnText.style.display = 'none';
+        loading.style.display = 'inline-block';
+        button.disabled = true;
+    } else {
+        btnText.style.display = 'inline-block';
+        loading.style.display = 'none';
+        button.disabled = false;
+    }
+}
+
+// Função para mostrar seção de resultados
+function mostrarResultados() {
+    document.getElementById('resultados').style.display = 'block';
+    document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
+}
+
 // Função para simular busca (será substituída pela chamada real da API)
 function configurarBusca() {
-    document.getElementById('btnBuscar').addEventListener('click', function() {
-        const nomeEmpresa = document.getElementById('empresaNome').value;
-        const siteEmpresa = document.getElementById('empresaSite').value;
+    document.getElementById('btnBuscar').addEventListener('click', async function() {
+        const nomeEmpresa = document.getElementById('empresaNome').value.trim();
+        const siteEmpresa = document.getElementById('empresaSite').value.trim();
         
-        if (!nomeEmpresa && !siteEmpresa) {
-            alert('Por favor, preencha pelo menos um dos campos.');
+        // Validar parâmetros
+        if (!validarParametros(nomeEmpresa, siteEmpresa)) {
+            exibirErro('Por favor, preencha pelo menos um dos campos (Nome da Empresa ou Site da Empresa).');
             return;
         }
         
-        // Simular loading
-        this.querySelector('.btn-text').style.display = 'none';
-        this.querySelector('.loading').style.display = 'inline-block';
-        this.disabled = true;
+        // Esconder erros anteriores
+        esconderErro();
         
-        // Simular delay da API
-        setTimeout(() => {
-            // Aqui será feita a chamada real para a API
-            console.log('Buscando dados para:', { nomeEmpresa, siteEmpresa });
+        // Mostrar loading
+        toggleLoading(this, true);
+        
+        try {
+            // Fazer chamada para a API
+            const dados = await buscarDadosProspeccao(nomeEmpresa, siteEmpresa);
+
+            console.log("JSON retornado:", dados);
+
+            // Preencher dados na interface
+            preencherDados(dados);
             
-            // Mostrar seção de resultados
-            document.getElementById('resultados').style.display = 'block';
+            // Mostrar resultados
+            mostrarResultados();
             
-            // Resetar botão
-            this.querySelector('.btn-text').style.display = 'inline-block';
-            this.querySelector('.loading').style.display = 'none';
-            this.disabled = false;
+        } catch (error) {
+            console.error('Erro na busca:', error);
             
-            // Scroll para resultados
-            document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
-        }, 2000);
+            // Exibir erro específico
+            if (error.message.includes('Failed to fetch')) {
+                exibirErro('Não foi possível conectar com a API. Verifique se o servidor está rodando em http://localhost:8000');
+            } else if (error.message.includes('CORS')) {
+                exibirErro('Erro de CORS. Verifique se o servidor permite requisições do frontend.');
+            } else if (error.message.includes('422')) {
+                exibirErro('Parâmetros inválidos. Verifique se os dados estão corretos.');
+            } else if (error.message.includes('Todos os endpoints falharam')) {
+                exibirErro('Não foi possível conectar com a API. Use o botão "Teste" para ver dados de demonstração.');
+            } else {
+                exibirErro(`Erro: ${error.message}. Use o botão "Teste" para ver dados de demonstração.`);
+            }
+        } finally {
+            // Esconder loading
+            toggleLoading(this, false);
+        }
     });
 }
 
@@ -98,6 +146,9 @@ function configurarTeste() {
         document.getElementById('empresaNome').value = 'Sales Impact';
         document.getElementById('empresaSite').value = 'https://salesimpact.com.br/';
         
+        // Esconder erros anteriores
+        esconderErro();
+        
         // Simular loading
         this.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Carregando...';
         this.disabled = true;
@@ -107,20 +158,32 @@ function configurarTeste() {
             preencherDados(dadosDemonstracao);
             
             // Mostrar seção de resultados
-            document.getElementById('resultados').style.display = 'block';
+            mostrarResultados();
             
             // Resetar botão
             this.innerHTML = '<i class="fas fa-flask me-2"></i>Teste';
             this.disabled = false;
-            
-            // Scroll para resultados
-            document.getElementById('resultados').scrollIntoView({ behavior: 'smooth' });
         }, 1500);
     });
+}
+
+// Função para testar conectividade com a API na inicialização
+async function verificarConectividadeAPI() {
+    try {
+        const conectado = await testarConectividadeAPI();
+        if (conectado) {
+            console.log('✅ API conectada com sucesso');
+        } else {
+            console.warn('⚠️ API não está acessível - usando dados de demonstração');
+        }
+    } catch (error) {
+        console.warn('⚠️ Erro ao verificar conectividade da API:', error);
+    }
 }
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
     configurarBusca();
     configurarTeste();
+    verificarConectividadeAPI();
 });

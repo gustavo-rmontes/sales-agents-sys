@@ -111,3 +111,45 @@
     width: 1rem;
     height: 1rem;
 }
+
+/* Estilos para mensagens de erro */
+.alert {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation: slideDown 0.3s ease-out;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+    border-left: 4px solid #dc3545;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Melhorias no loading */
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Melhorias na responsividade */
+@media (max-width: 768px) {
+    .col-md-2 {
+        margin-top: 1rem;
+    }
+    
+    .btn {
+        width: 100% !important;
+    }
+}

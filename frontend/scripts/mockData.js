@@ -2,7 +2,6 @@
 
 const dadosDemonstracao = {
     "empresa": {
-        "nome_da_empresa": "Sales Impact",
         "website": "https://salesimpact.com.br/",
         "setor": "Aceleração de Vendas B2B / Geração de Demanda",
         "porte": "Média",
