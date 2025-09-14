@@ -19,7 +19,7 @@ def get_health():
     """
     return {"message": "Application is healthy"}
 
-@router.post("/prospect", response_model=ProspeccaoResposta)
+@router.get("/prospect", response_model=ProspeccaoResposta)
 def prospect_analysis(nome_da_empresa: str, website: str):
     """
     Retorna a análise de mercado da empresa
