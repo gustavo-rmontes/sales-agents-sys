@@ -26,6 +26,7 @@ def prospect_analysis(nome_da_empresa: str, website: str):
     """
     try:
         response = build_prospect_analysis(nome_da_empresa, website)
+        print(response)
         return response
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
