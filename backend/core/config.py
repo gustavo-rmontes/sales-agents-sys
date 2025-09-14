@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: str = ""
     GEMINI_API_KEY: str
     SERPER_API_KEY: str
+    DEEPSEEK_API_KEY: str
+    OPENROUTER_API_KEY: str
 
     @field_validator("ALLOWED_ORIGINS")
     def parse_allowed_origins(cls, v: str) -> List[str]:
