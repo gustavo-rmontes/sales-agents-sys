@@ -1,4 +1,7 @@
 # Roadmap de Implementação – MVP "Prospecção Inteligente de Leads"
+
+Roadmap para orientar o desenvolvimento da aplicação. 
+
 ## Fase 1 — Preparação do ambiente
 - Criar repositório GitHub com estrutura inicial (`backend/`, `frontend/`).
 - Configurar `pyproject.toml` com dependências (FastAPI, CrewAI, Gemini SDK, etc.).
@@ -51,7 +54,6 @@ Criar endpoint `/prospect` que:
 - Usar Bootstrap para layout rápido.
 
 ## Fase 6 — Refinamentos
-- Adicionar logs com `loguru`.
 - Melhorar prompts dos agentes (prompt engineering).
 - Documentar no README como rodar o sistema.
 - Escrever 1–2 testes unitários simples (mockando resposta do Gemini).
@@ -59,7 +61,6 @@ Criar endpoint `/prospect` que:
 ## Fase 7 — Entrega
 - Publicar repositório no GitHub.
 - Documentar a arquitetura e funcionamento da aplicação..
-
 
 ## Escopo do MVP:
 - Fluxo ponta a ponta funcionando (frontend ↔ backend ↔ agentes). 

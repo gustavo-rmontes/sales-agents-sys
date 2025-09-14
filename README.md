@@ -6,7 +6,7 @@ A solução coleta informações sobre empresas, analisa concorrência e gera um
 ## 📌 Funcionalidades do MVP
 **Entrada**: nome ou site da empresa.
 
-**Saída**: Resumo da empresa, Concorrentes do setor e Mensagem de prospecção personalizada
+**Saída**: Resumo da empresa, Concorrentes do setor e Mensagem de prospecção personalizada.
 
 ## 🏗️ Arquitetura
 ![Imagem da arquitetura simplificada do sistema](docs/inteligent_prospects_architecture.png)
@@ -55,10 +55,12 @@ HTML, CSS, JS e Bootstrap → formulário simples para interação.
 ```
 
 ## 🔑 Variáveis de Ambiente
-Crie um arquivo `.env` dentro de `backend/` baseado em [`.env.example`](backend/.env.example):
+Crie um arquivo `.env` dentro de `backend/` baseado-se em [`.env.example`](backend/.env.example):
 ``` bash
-GEMINI_API_KEY=your_gemini_api_key
+ALLOWED_ORIGINS=your_frontend_origin
 SERPER_API_KEY=your_serper_api_key
+GEMINI_API_KEY=your_gemini_api_key # for gemini-2.0-flash model
+OPENROUTER_API_KEY=your_openrouter_api_key # for deepseek-r1 model
 ```
 
 ## ▶️ Como rodar o projeto
@@ -80,6 +82,6 @@ uv run main.py
 
 O backend estará disponível em: http://127.0.0.1:8000
 
-4. Rodar o frontend
+4. Rodar o frontend:
 
 Abra o arquivo `frontend/index.html` diretamente no navegador.
